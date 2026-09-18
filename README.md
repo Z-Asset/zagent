@@ -12,6 +12,9 @@
 
 三者共享 `ChatModel`（OpenAI 兼容客户端，DeepSeek/Qwen/GLM/GPT 通吃）。
 
+> 想了解"模型训练的思路"（为什么逐日清洗、什么是 walk-forward、怎么评估）？
+> 看 [`docs/training.md`](docs/training.md)。
+
 ## 三角色
 
 | 角色 | 职责 |
