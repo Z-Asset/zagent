@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zagent"
+version = "0.1.0"
+description = "Zagent：统一 RSI 三角色自改进闭环框架（Data-RSI + Harness-RSI + Model-RSI）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Z Asset", email = "x@zasset.cn" }]
+keywords = ["zagent", "rsi", "self-improvement", "alpha", "quant", "hyperparameter", "tpe", "harness"]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "pyarrow>=12.0",
+]
+
+[project.optional-dependencies]
+gpu = ["torch>=2.0"]
+
+[project.scripts]
+zagent = "zagent.cli:main"
+
+[tool.setuptools]
+packages = ["zagent", "zagent.data", "zagent.harness", "zagent.harness.tasks", "zagent.model"]

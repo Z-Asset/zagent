@@ -1,0 +1,12 @@
+# Zagent 依赖
+# torch 分 CPU/CUDA，按目标机器二选一，见下注释
+
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+pyarrow>=12.0
+
+# CPU 版（无 GPU 机器）：
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# CUDA 版（有 GPU，Model-RSI 全量搜索用）：
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128

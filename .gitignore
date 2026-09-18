@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+runs/
+runs_alpha/
+node_modules/
+lib/
+.npm/
+*.tgz
+.DS_Store
+
+# 实验对象 / 数据（不进代码仓库）
+S13*/

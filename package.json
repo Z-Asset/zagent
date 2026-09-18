@@ -1,0 +1,66 @@
+{
+  "name": "@zasset/zagent",
+  "version": "0.1.0",
+  "description": "Zagent：统一 RSI 三角色自改进闭环框架。Data-RSI（数据清洗+经验提取）+ Harness-RSI（进化系统提示词/记忆/技能）+ Model-RSI（进化 alpha 训练配方）。Ships one skill.",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "plugins",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1-rc.1",
+    "@deepseek-ai/dsh-skill": ">=0.0.1-rc.1 <0.1.0 || >=0.1.0-rc.1 <0.2.0-0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1-rc.1",
+    "@deepseek-ai/dsh-skill": ">=0.0.1-rc.1 <0.1.0 || >=0.1.0-rc.1 <0.2.0-0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "rsi",
+    "self-improvement",
+    "alpha",
+    "quant",
+    "hyperparameter",
+    "tpe",
+    "harness",
+    "skills"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Z Asset",
+    "email": "x@zasset.cn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Z-Asset/zagent.git"
+  },
+  "homepage": "https://github.com/Z-Asset/zagent"
+}

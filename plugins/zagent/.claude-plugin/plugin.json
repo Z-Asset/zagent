@@ -1,0 +1,9 @@
+{
+  "name": "zagent",
+  "description": "Zagent：统一 RSI 三角色自改进闭环框架。Data-RSI（数据清洗+经验提取）+ Harness-RSI（进化系统提示词/记忆/技能）+ Model-RSI（进化 alpha 训练配方）。离线一条命令跑，GPU 自动走 CUDA。",
+  "version": "0.1.0",
+  "author": {
+    "name": "Z Asset",
+    "email": "x@zasset.cn"
+  }
+}
