@@ -189,6 +189,16 @@ def run_alpha(
           f"fast_epochs={fast_epochs}  blocks={blocks}  max_train={max_train}  "
           f"patience={patience}  isolated={isolated}")
 
+    # 进度条：共 1(基线) + iterations 个配方要评估
+    total_steps = 1 + iterations
+    done = 0
+
+    def _progress():
+        nonlocal done
+        done += 1
+        bar = "#" * done + "-" * (total_steps - done)
+        print(f"  [进度 {done}/{total_steps}] [{bar}]")
+
     def _evaluate(recipe):
         if isolated:
             return evaluate_recipe_isolated(
@@ -207,6 +217,7 @@ def run_alpha(
     stats.best_rank_ic = res.primary_metric()
     stats.best_recipe = dict(base)
     stats.history.append(_record(base, res, accepted=True, reason="基线"))
+    _progress()
 
     no_improve = 0
     for it in range(1, iterations + 1):
@@ -248,6 +259,7 @@ def run_alpha(
         verdict = "接受(更优)" if accepted else "拒绝(未超)"
         print(f"      RankIC={metric:+.4f}  ICIR={res.oos_icir}  SR={res.oos_sr}  "
               f"耗时={res.elapsed_s}s  -> {verdict}" + (f"  [{reason}]" if reason else ""))
+        _progress()
 
         if patience and no_improve >= patience:
             print(f"  [早停] 连续 {patience} 轮无改进，停止探索")
