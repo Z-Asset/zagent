@@ -35,6 +35,11 @@ zagent doctor <数据包路径>            # 体检：sha1 对账 + 依赖 + 数
 
 默认离线零依赖；`--online` 换 DeepSeek LLM 当 Refiner。
 
+## Jupyter 用法
+
+同事在 Jupyter 里打开 `examples/ZAGENT.ipynb`，改第 1 个 cell 的 `PKG` 指向
+已备好的数据包目录，Cell → Run All 即可。前提 `pip install zagent jupyter ipykernel`。
+
 ## Data-RSI 清洗口径
 
 逐日截面，顺序不可调换：**去极值(clip) → 截面驻日标准化(zscore) → 截面缺失值中位数填充**。eps 统一，绝不用跨期信息。

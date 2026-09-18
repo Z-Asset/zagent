@@ -34,6 +34,18 @@ zagent doctor <数据包路径>                # 体检
 
 默认离线；`--online` 换 DeepSeek LLM 当 Refiner。GPU 自动走 CUDA。
 
+## Jupyter Notebook 用法
+
+同事在 Jupyter 里也能用：打开 `examples/ZAGENT.ipynb`，改第 1 个 cell 的
+`PKG` 路径（指向已备好的数据包目录），然后 Cell → Run All。
+
+```
+pip install zagent jupyter ipykernel   # 目标机装包 + Jupyter
+jupyter notebook                       # 打开，选 examples/ZAGENT.ipynb
+```
+
+数据包目录须含 `pkg_api.py`（Model-RSI 接口，见下）。
+
 ## Data-RSI 清洗口径
 
 逐日截面，顺序不可调换：**去极值(clip) → 截面驻日标准化(zscore) → 截面缺失值中位数填充**。eps 统一。绝不用跨期信息。
