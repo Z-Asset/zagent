@@ -34,18 +34,30 @@ def _load_train(pkg: Path):
 
 
 def read_data(pkg: Path):
-    """读数据 + 用数据包口径预处理，返回 (X, R, dates, codes)。
+    """读数据 + 用 **zagent 框架正确口径** 预处理，返回 (X, R, dates, codes)。
+
+    清洗顺序（业界标准，逐日截面）：去极值 → 截面标准化 → 中位数填充。
+    用 zagent.data.preprocess 的正确实现，**不复用** train_from_xy 里的旧口径
+    （旧口径是「填→截→标」，顺序错误）。
 
     X : (T, N, K) float32，已预处理
     R : (T, N) float32 次日收益，NaN 保留
     """
     global _CURRENT_PKG
     _CURRENT_PKG = pkg
-    mod = _load_train(pkg)
-    panel, _ = mod._read_pkg_data(pkg, verbose=False)
-    X = mod.preprocess_panel(mod.raw_features(panel), mod.PreprocessConfig(), verbose=False)
-    R = mod.build_labels(mod.labels(panel), verbose=False)
-    return X, R, panel.dates, panel.codes
+    from zagent.data.preprocess import preprocess_panel, PreprocessConfig, build_labels
+
+    X_raw = np.load(pkg / "X" / "X.npy").astype(float)
+    R_raw = np.load(pkg / "Y" / "Y_target.npy").astype(float)
+    dates = np.array([d.strip() for d in
+                      (pkg / "X" / "dates.txt").read_text(encoding="utf-8").splitlines()
+                      if d.strip()], dtype="datetime64[ns]")
+    codes = [c.strip() for c in
+             (pkg / "X" / "codes.txt").read_text(encoding="utf-8").splitlines()
+             if c.strip()]
+    X = preprocess_panel(X_raw, PreprocessConfig(), verbose=False)
+    R = build_labels(R_raw, verbose=False)
+    return X, R, dates, codes
 
 
 def build_model(recipe: dict, K: int, L: int, seed: int):
